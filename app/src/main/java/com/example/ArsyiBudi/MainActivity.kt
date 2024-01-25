@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 
     private var imageUri: Uri? = null // Tambahkan deklarasi imageUri
 
-
     private val addResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val data: Intent? = result.data
