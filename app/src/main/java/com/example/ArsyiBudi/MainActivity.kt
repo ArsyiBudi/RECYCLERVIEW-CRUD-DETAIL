@@ -32,8 +32,7 @@ class MainActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val data: Intent? = result.data
             val imageView: ImageView = findViewById(R.id.image_view)
-            if
-                    (result.resultCode == Activity.RESULT_OK && data != null) {
+            if (result.resultCode == Activity.RESULT_OK && data != null) {
                 imageUri = data.data
                 imageView.setImageURI(imageUri)
             }
