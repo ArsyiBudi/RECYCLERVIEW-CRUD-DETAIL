@@ -11,17 +11,19 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import com.example.ArsyiBudi.ItemData
 
 class AddItemActivity : AppCompatActivity() {
 
-    private var imageUri: Uri? = null // Tambahkan deklarasi imageUri
+    private lateinit var imageUri:Uri
 
     private val resultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result ->
             val data: Intent? = result.data
             val imageView: ImageView = findViewById(R.id.image_view)
             if (result.resultCode == Activity.RESULT_OK && data != null) {
-                imageUri = data.data
+                imageUri = data.data!!
                 imageView.setImageURI(imageUri)
             }
         }
@@ -53,20 +55,22 @@ class AddItemActivity : AppCompatActivity() {
         }
 
         saveBtn.setOnClickListener {
-            val title = itemTitle.text.toString()
-            val subtitle = itemSubtitle.text.toString()
-            val desc = itemDesc.text.toString()
-            val imageUri = this.imageUri
+            val titles = itemTitle.text.toString()
+            val subtitles = itemSubtitle.text.toString()
+            val descs = itemDesc.text. toString()
 
-            val itemData = ItemData(title, subtitle, desc, imageUri)
+            if (intent.hasExtra("position") && !this::imageUri.isInitialized) { val
+                imagestr = intent.getStringExtra("image"); val image = Uri.parse(imagestr);
+            imageUri = image }
 
+
+            val itemList = ItemData(titles, subtitles, descs, imageUri)
             val resultIntent = Intent().apply {
                 putExtra("action", "add")
-                putExtra("item", itemData)
-                if (intent.hasExtra("position")) {
+                putExtra("item", itemList)
+                if (intent.hasExtra("position"))
                     putExtra("position", intent.getIntExtra("position", 0))
                 }
-            }
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
             Toast.makeText(this, "Add Item Successful", Toast.LENGTH_SHORT).show()

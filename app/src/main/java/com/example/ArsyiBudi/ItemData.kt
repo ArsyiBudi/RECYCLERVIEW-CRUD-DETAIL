@@ -9,14 +9,15 @@ data class ItemData(
     var subtitle: String?,
     var desc: String?,
     var img: Uri?
-) : Parcelable {
+    ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readParcelable(Uri::class.java.classLoader) // Perbaikan di sini
-    )
+    ) {
 
+    }
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)
         parcel.writeString(subtitle)
@@ -35,6 +36,6 @@ data class ItemData(
 
         override fun newArray(size: Int): Array<ItemData?> {
             return arrayOfNulls(size)
+            }
         }
     }
-}

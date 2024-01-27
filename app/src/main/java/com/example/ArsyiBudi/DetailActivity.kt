@@ -18,6 +18,7 @@ class DetailActivity : AppCompatActivity() {
         val subtitleview = findViewById<TextView>(R.id.detail_Subtitle)
         val descview = findViewById<TextView>(R.id.detail_Description)
         val imageview = findViewById<ImageView>(R.id.detail_Image)
+
         titleview.text = title
         subtitleview.text = subtitle
         descview.text = description
