@@ -42,7 +42,7 @@ class ItemAdapter(val c: Context, val itemList: ArrayList<ItemData>) :
             intent.putExtra("title", itemList[adapterPosition].title)
             intent.putExtra("subtitle", itemList[adapterPosition].subtitle)
             intent.putExtra("description", itemList[adapterPosition].desc)
-            intent.putExtra("image", itemList[adapterPosition].img?.toString())
+            intent.putExtra("image", itemList[adapterPosition].img.toString())
             c.startActivity(intent)
         }
 
@@ -56,7 +56,7 @@ class ItemAdapter(val c: Context, val itemList: ArrayList<ItemData>) :
                         intent.putExtra("title", itemList[adapterPosition].title)
                         intent.putExtra("subtitle", itemList[adapterPosition].subtitle)
                         intent.putExtra("description", itemList[adapterPosition].desc)
-                        intent.putExtra("image", itemList[adapterPosition].img?.toString())
+                        intent.putExtra("image", itemList[adapterPosition].img.toString())
                         intent.putExtra("position", adapterPosition)
                         (c as Activity).startActivityForResult(intent, 2)
                         true
@@ -86,18 +86,11 @@ class ItemAdapter(val c: Context, val itemList: ArrayList<ItemData>) :
             }
 
             popupMenus.show()
-
-            try {
                 val popup = PopupMenu::class.java.getDeclaredField("mPopup")
                 popup.isAccessible = true
                 val menu = popup.get(popupMenus)
-                if (menu != null) {
-                    menu.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+            menu.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
                         .invoke(menu, true)
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
         }
     }
 
