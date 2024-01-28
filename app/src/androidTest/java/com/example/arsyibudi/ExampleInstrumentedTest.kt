@@ -1,4 +1,4 @@
-package com.example.ArsyiBudi
+package com.example.arsyibudi
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

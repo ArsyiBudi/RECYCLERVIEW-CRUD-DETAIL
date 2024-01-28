@@ -1,4 +1,4 @@
-package com.example.ArsyiBudi
+package com.example.arsyibudi
 
 import org.junit.Test
 

@@ -13,14 +13,20 @@
         android:theme="@style/Theme.RESTOADMIN"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.arsyibudi.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.arsyibudi.AddItemActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.arsyibudi.DetailActivity"
+            android:exported="true" />
     </application>
+
 
 </manifest>

@@ -1,23 +1,24 @@
-package com.example.ArsyiBudi
+package com.example.arsyibudi.model
 
 import android.net.Uri
 import android.os.Parcel
 import android.os.Parcelable
 
+
 data class ItemData(
     var title: String?,
-    var subtitle: String?,
-    var desc: String?,
+    var subtitle:String?,
+    var desc:String?,
     var img: Uri?
-    ) : Parcelable {
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readParcelable(Uri::class.java.classLoader) // Perbaikan di sini
+        parcel.readParcelable(Uri::class.java.classLoader)
     ) {
-
     }
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)
         parcel.writeString(subtitle)
@@ -36,6 +37,6 @@ data class ItemData(
 
         override fun newArray(size: Int): Array<ItemData?> {
             return arrayOfNulls(size)
-            }
         }
     }
+}

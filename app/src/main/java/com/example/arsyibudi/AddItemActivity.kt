@@ -1,9 +1,8 @@
-package com.example.ArsyiBudi
+package com.example.arsyibudi
 
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -11,22 +10,23 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import com.example.ArsyiBudi.ItemData
+import androidx.activity.result.contract.ActivityResultContracts
+import com.example.ArsyiBudi.R
+import com.example.arsyibudi.model.ItemData
 
 class AddItemActivity : AppCompatActivity() {
 
     private lateinit var imageUri:Uri
 
-    private val resultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result ->
-            val data: Intent? = result.data
-            val imageView: ImageView = findViewById(R.id.image_view)
-            if (result.resultCode == Activity.RESULT_OK && data != null) {
-                imageUri = data.data!!
-                imageView.setImageURI(imageUri)
-            }
+    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val data: Intent? = result.data
+        val imageView: ImageView = findViewById(R.id.image_view)
+
+        if (result.resultCode == Activity.RESULT_OK && data != null) {
+            imageUri = data.data!!
+            imageView.setImageURI(imageUri)
         }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,20 +57,14 @@ class AddItemActivity : AppCompatActivity() {
         saveBtn.setOnClickListener {
             val titles = itemTitle.text.toString()
             val subtitles = itemSubtitle.text.toString()
-            val descs = itemDesc.text. toString()
-
-            if (intent.hasExtra("position") && !this::imageUri.isInitialized) { val
-                imagestr = intent.getStringExtra("image"); val image = Uri.parse(imagestr);
-            imageUri = image }
-
-
+            val descs = itemDesc.text.  toString()
+            if (intent.hasExtra("position") && !this::imageUri.isInitialized) { val imagestr = intent.getStringExtra("image"); val image = Uri.parse(imagestr); imageUri = image }
             val itemList = ItemData(titles, subtitles, descs, imageUri)
             val resultIntent = Intent().apply {
                 putExtra("action", "add")
                 putExtra("item", itemList)
-                if (intent.hasExtra("position"))
-                    putExtra("position", intent.getIntExtra("position", 0))
-                }
+                if (intent.hasExtra("position")) putExtra("position", intent.getIntExtra("position", 0))
+            }
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
             Toast.makeText(this, "Add Item Successful", Toast.LENGTH_SHORT).show()
